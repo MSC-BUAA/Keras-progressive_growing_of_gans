@@ -75,7 +75,7 @@ resume_kimg             = <previous trained images in thousands>,
 We provide **main.py** for remote training for Visual Stdio or Visual Stdio Code users. So you can directely start the training process using command line, which will be convenient in remote job submission.
 
 ```
-$ python3 main.py 	--data_dir = <dataset h5 file directory> 		\
+$ python3 main.py 	--data_dir = <dataset h5 file directory> 	\
 			--resume_dir = <weights snapshot directory> 	\
 			--resume_kimg = <previous trained images in thousands>
 ```
@@ -85,6 +85,7 @@ $ python3 main.py 	--data_dir = <dataset h5 file directory> 		\
 Any bug report or advice, please contact us:
 
 Kun Yan (naykun) : yankun1138283845@foxmail.com
+
 Yihang Yin (Somedaywilldo) : somedaywilldo@foxmail.com
 
 ## License
