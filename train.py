@@ -157,8 +157,7 @@ def train_gan(
     image_snapshot_ticks    = 1,
     network_snapshot_ticks  = 4,
     image_grid_type         = 'default',
-    resume_network          = '000-celeba/network-snapshot-000488',
-    #resume_network          = None,
+    resume_network          = None,
     resume_kimg             = 511.6,
     resume_time             = 0.0):
 
