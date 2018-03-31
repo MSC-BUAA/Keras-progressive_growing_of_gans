@@ -76,8 +76,8 @@ We provide **main.py** for remote training for Visual Stdio or Visual Stdio Code
 
 ```
 $ python3 main.py 	--data_dir = <dataset h5 file directory> 		\
-					--resume_dir = <weights snapshot directory> 	\
-					--resume_kimg = <previous trained images in thousands>
+			--resume_dir = <weights snapshot directory> 	\
+			--resume_kimg = <previous trained images in thousands>
 ```
 
 ## Contact us
