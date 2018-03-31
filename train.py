@@ -4,14 +4,13 @@ import time
 import glob
 from model import *
 from config import *
+
 from keras.models import load_model,save_model
-#from keras.models import load_weights,save_weights
 from keras.layers import Input
 from keras import optimizers
 
 import dataset
 import config
-
 
 import misc
 
@@ -23,15 +22,15 @@ def load_GD(path, compile = False):
     return G,D
 
 def save_GD(G,D,path,overwrite = False):
-    #try:
+    try:
         os.makedirs(path);
         G_path = os.path.join(path,'Generator.h5')
         D_path = os.path.join(path,'Discriminator.h5')
         save_model(G,G_path,overwrite = overwrite)
         save_model(D,D_path,overwrite = overwrite)
         print("Save model to %s"%path)
-    #except:
-    #    print("Save model snapshot failed!")
+    except:
+        print("Save model snapshot failed!")
 
 def load_GD_weights(G,D,path, by_name = True):
     G_path = os.path.join(path,'Generator.h5')
@@ -125,8 +124,6 @@ def load_dataset(dataset_spec=None, verbose=True, **spec_overrides):
     drange_orig = training_set.get_dynamic_range()
     if verbose: print('Dynamic range =', drange_orig)
     return training_set, drange_orig
-
-
 
 speed_factor = 20
 
