@@ -60,7 +60,7 @@ speed_factor = 20
 
 
 
-**Now, if your settings have no problem, you should see running information like our [running_log_example](running_log_example.txt) **
+** So far, if your settings have no problem, you should see running information like our [running_log_example](running_log_example.txt) **
 
 ### 4. Save and resume training weights
 
