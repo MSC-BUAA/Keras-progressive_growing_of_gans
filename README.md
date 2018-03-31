@@ -61,13 +61,23 @@ speed_factor = 20
 
 Parameters in **train.py** will determine the frequency of saving the training result snapshot. And if you want to resume a previous result, just modify **train.py**:
 ```
-#In train.py:
+# In train.py:
 image_grid_type         = 'default',
 # modify this line bellow
 # resume_network          = None,
 # to:
 resume_network          = <weights snapshot directory>,
 resume_kimg             = <previous trained images in thousands>,
+```
+
+### 5. Using main.py (optional)
+
+We provide **main.py** for remote training for Visual Stdio or Visual Stdio Code users. So you can directely start the training process using command line, which will be convenient in remote job submission.
+
+```
+$ python3 main.py 	--data_dir = <dataset h5 file directory> 		\
+					--resume_dir = <weights snapshot directory> 	\
+					--resume_kimg = <previous trained images in thousands>
 ```
 
 ## Contact us

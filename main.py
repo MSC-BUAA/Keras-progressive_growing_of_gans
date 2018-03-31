@@ -55,10 +55,10 @@ from keras.optimizers import RMSprop
 from train import *
 
 def main():
-     #指定随机种子
+
     np.random.seed(config.random_seed)
     func_params = config.train
-    #config.train 为学习率等参数的设置字典
+
     func_name = func_params['func']
     del func_params['func']
     globals()[func_name](**func_params)
@@ -77,12 +77,21 @@ if __name__ == "__main__":
                         help="Input directory where where logs and models are saved", 
                         required=False
                         )
-    parser.add_argument("--resume_dir",type = str,default = None,help="whether resume model and where the model are saved",required = False)
+    parser.add_argument("--resume_dir",type = str,
+                        default = None,
+                        help="whether resume model and where the model are saved",
+                        required = False)
+    parser.add_argument("--resume_kimg",type = float,
+                        default = 0.0,
+                        help="previous trained images in thousands",
+                        required = False)
     args, unknown = parser.parse_known_args()
     config.data_dir = args.data_dir
     config.result_dir = args.result_dir
     if hasattr(args,'resume_dir') and args.resume_dir != None:
         config.train.update(resume_network=args.resume_dir)
+    if hasattr(args,'resume_kimg') and args.resume_kimg != None:
+        config.train.update(resume_kimg=args.resume_kimg)
     #log_dir = output_dir
 
     main()
