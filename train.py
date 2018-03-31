@@ -163,7 +163,6 @@ def train_gan(
     resume_time             = 0.0):
 
     training_set, drange_orig = load_dataset()
-    #print("training_set.shape:",training_set.shape)
 
     if resume_network:
         print("Resuming weight from:"+resume_network)
@@ -173,13 +172,11 @@ def train_gan(
     else:
         G = Generator(num_channels=training_set.shape[3], resolution=training_set.shape[1], label_size=training_set.labels.shape[1], **config.G)
         D = Discriminator(num_channels=training_set.shape[3], resolution=training_set.shape[1], label_size=training_set.labels.shape[1], **config.D)
-        #missing Gs
+
     G_train,D_train = PG_GAN(G,D,config.G['latent_size'],0,training_set.shape[1],training_set.shape[3]) 
-    #G_tmp = Model(inputs=[G.get_input_at(0)],
-    #              outputs = [G.get_layer('G6bPN').output])   
+
     print(G.summary())
     print(D.summary())
-    #print(pg_GAN.summary())
 
 
     # Misc init.
@@ -189,12 +186,10 @@ def train_gan(
     min_lod, max_lod = -1.0, -2.0
     fake_score_avg = 0.0
 
-   
 
     G_opt = optimizers.Adam(lr = 0.0,beta_1=adam_beta1,beta_2=adam_beta2,epsilon = adam_epsilon)
     D_opt = optimizers.Adam(lr = 0.0,beta_1 = adam_beta1,beta_2 = adam_beta2,epsilon = adam_epsilon)
-    # GAN_opt = optimizers.Adam(lr = 0.0,beta_1 = 0.0,beta_2 = 0.99)
-    
+
     if config.loss['type']=='wass':
         G_loss = wasserstein_loss
         D_loss = wasserstein_loss
@@ -217,14 +212,6 @@ def train_gan(
     tick_train_out = []
     train_start_time = tick_start_time - resume_time
 
-
-
-
-    #real_image_input = Input((training_set.shape[2],training_set.shape[2],training_set.shape[-1]),name = "real_image_input")
-    #real_label_input = Input((training_set.labels.shape[1]),name = "real_label_input")
-    #fake_latent_input = Input((config.G['latent_size']),name = "fake_latent_input")
-    #fake_labels_input = Input((training_set.labels.shape[1]),name = "fake_label_input")
-
     if image_grid_type == 'default':
         if image_grid_size is None:
             w, h = G.output_shape[1], G.output_shape[2]
@@ -238,21 +225,10 @@ def train_gan(
     else:
         raise ValueError('Invalid image_grid_type', image_grid_type)
 
-    #print("image_grid_size:",image_grid_size)
-
     result_subdir = misc.create_result_subdir(config.result_dir, config.run_desc)
-    #snapshot_fake_images = gen_fn(snapshot_fake_latents, snapshot_fake_labels)
-    #result_subdir = misc.create_result_subdir(config.result_dir, config.run_desc)
-    
-    #('example_real_images.shape:', (120, 3, 128, 128))
 
-    #print("example_real_images:",example_real_images)
     print("example_real_images.shape:",example_real_images.shape)
     misc.save_image_grid(example_real_images, os.path.join(result_subdir, 'reals.png'), drange=drange_orig, grid_size=image_grid_size)
-    #misc.save_image_grid(snapshot_fake_images, os.path.join(result_subdir, 'fakes%06d.png' % 0), drange=drange_viz, grid_size=image_grid_size)
-    
-    #NINweight = G.get_layer('Glod0NIN').get_weights()[0]
-    #print("Glod0NIN weight:",NINweight) 
 
     snapshot_fake_latents = random_latents(np.prod(image_grid_size), G.input_shape)
     snapshot_fake_images = G.predict_on_batch(snapshot_fake_latents)
@@ -293,17 +269,6 @@ def train_gan(
         if min_lod != new_min_lod or max_lod != new_max_lod:
             min_lod, max_lod = new_min_lod, new_max_lod
 
-        #    # Pre-process reals.
-        #    real_images_expr = real_images_var
-        #    if dequantize_reals:
-        #        epsilon_noise = K.random_uniform_variable(real_image_input.shape(), low=-0.5, high=0.5, dtype='float32', seed=np.random.randint(1, 2147462579))
-        #        epsilon_noise = rnd.uniform(size=real_images_expr.shape, low=-0.5, high=0.5, dtype='float32')
-        #        real_images_expr = T.cast(real_images_expr, 'float32') + epsilon_noise # match original implementation of Improved Wasserstein
-        #    real_images_expr = misc.adjust_dynamic_range(real_images_expr, drange_orig, drange_net)
-        #    if min_lod > 0: # compensate for shrink_based_on_lod
-        #        real_images_expr = T.extra_ops.repeat(real_images_expr, 2**min_lod, axis=2)
-        #        real_images_expr = T.extra_ops.repeat(real_images_expr, 2**min_lod, axis=3)
-        # train D
         d_loss = None
         for idx in range(D_training_repeats):
             mb_reals, mb_labels = training_set.get_random_minibatch_channel_last(minibatch_size, lod=cur_lod, shrink_based_on_lod=True, labels=True)
@@ -322,9 +287,7 @@ def train_gan(
             d_score_real = D.predict_on_batch(mb_reals)
             d_score_fake = D.predict_on_batch(mb_fakes)
             print("real score: %d fake score: %d"%(np.mean(d_score_real),np.mean(d_score_fake)))
-            #d_loss_real = D.train_on_batch(mb_reals, -np.ones((mb_reals.shape[0],1,1,1)))
-            #d_loss_fake = D.train_on_batch(mb_fakes, np.ones((mb_fakes.shape[0],1,1,1)))
-            #d_loss = 0.5 * np.add(d_loss_fake, d_loss_real)
+
             cur_nimg += minibatch_size
 
         #train G
@@ -332,30 +295,9 @@ def train_gan(
         mb_latents = random_latents(minibatch_size,G.input_shape)
         mb_labels_rnd = random_labels(minibatch_size,training_set)
 
-        #if cur_nimg//100 !=nimg_h:
-        #    snapshot_fake_images = G.predict_on_batch(snapshot_fake_latents)
-        #    print(np.mean(snapshot_fake_images,axis=-1))
-        #    G_lod = G_tmp.predict(snapshot_fake_latents)
-        #    print("G6bPN:",np.mean(G_lod,axis=-1))
-        #    misc.save_image_grid(snapshot_fake_images, os.path.join(result_subdir, 'fakes%06d_beforeGtrain.png' % (cur_nimg)), drange=drange_viz, grid_size=image_grid_size)
-
         g_loss = G_train.train_on_batch([mb_latents], (-1)*np.ones((mb_latents.shape[0],1,1,1)))
 
         print ("%d [D loss: %f] [G loss: %f]" % (cur_nimg, d_loss,g_loss))
-        #print(cur_nimg)
-        #print(g_loss)
-        #print(d_loss)
-        # Fade in D noise if we're close to becoming unstable
-        #if cur_nimg//100 !=nimg_h:
-        #    nimg_h=cur_nimg//100
-        #    snapshot_fake_images = G.predict_on_batch(snapshot_fake_latents)
-        #    print(np.mean(snapshot_fake_images,axis=-1))
-        #    G_lod = G_tmp.predict(snapshot_fake_latents)
-        #    print("G6bPN:",np.mean(G_lod,axis=-1))
-        #    NINweight = G.get_layer('Glod0NIN').get_weights()[0]
-        #    print(NINweight) 
-        #    misc.save_image_grid(snapshot_fake_images, os.path.join(result_subdir, 'fakes%06d.png' % (cur_nimg)), drange=drange_viz, grid_size=image_grid_size)
-
 
         fake_score_cur = np.clip(np.mean(d_loss), 0.0, 1.0)
         fake_score_avg = fake_score_avg * gdrop_beta + fake_score_cur * (1.0 - gdrop_beta)
@@ -372,12 +314,6 @@ def train_gan(
             tick_train_avg = tuple(np.mean(np.concatenate([np.asarray(v).flatten() for v in vals])) for vals in zip(*tick_train_out))
             tick_train_out = []
 
-            '''
-            # Print progress.
-            print ('tick %-5d kimg %-8.1f lod %-5.2f minibatch %-4d time %-12s sec/tick %-9.1f sec/kimg %-6.1f Dgdrop %-8.4f Gloss %-8.4f Dloss %-8.4f Dreal %-8.4f Dfake %-8.4f' % (
-                (cur_tick, cur_nimg / 1000.0, cur_lod, minibatch_size, format_time(cur_time - train_start_time), tick_time, tick_time / tick_kimg, gdrop_strength) + tick_train_avg))
-            '''
-
             # Visualize generated images.
             if cur_tick % image_snapshot_ticks == 0 or cur_nimg >= total_kimg * 1000:
                 snapshot_fake_images = G.predict_on_batch(snapshot_fake_latents)
@@ -392,10 +328,8 @@ def train_gan(
     print('Done.')
 
 if __name__ == '__main__':
-    #指定随机种子
     np.random.seed(config.random_seed)
     func_params = config.train
-    #config.train 为学习率等参数的设置字典
     func_name = func_params['func']
     del func_params['func']
     globals()[func_name](**func_params)

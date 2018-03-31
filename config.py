@@ -1,6 +1,3 @@
-#data_dir = '/Users/mac/Desktop/Theano_PG_GANs_Clean/datasets/'
-#data_dir = '/data/yyh/Theano_PG_GANs_Clean/datasets/'
-#data_dir = 'D:/微软实践项目/progressive_growing_of_gans/'
 data_dir = 'datasets'
 result_dir = 'results'
 
