@@ -158,7 +158,7 @@ def train_gan(
     network_snapshot_ticks  = 4,
     image_grid_type         = 'default',
     resume_network          = None,
-    resume_kimg             = 511.6,
+    resume_kimg             = 0,
     resume_time             = 0.0):
 
     training_set, drange_orig = load_dataset()
