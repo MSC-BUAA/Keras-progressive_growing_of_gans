@@ -93,6 +93,14 @@ Kun Yan (naykun) : yankun1138283845@foxmail.com
 
 Yihang Yin (Somedaywilldo) : somedaywilldo@foxmail.com
 
+## Reference
+
+1. *Progressive Growing of GANs for Improved Quality, Stability, and Variation*, **Tero Karras** (NVIDIA), **Timo Aila** (NVIDIA), **Samuli Laine** (NVIDIA), **Jaakko Lehtinen** (NVIDIA and Aalto University) [Paper (NVIDIA research)](http://research.nvidia.com/publication/2017-10_Progressive-Growing-of)
+
+2. tkarras/progressive_growing_of_gans (https://github.com/tkarras/progressive_growing_of_gans
+
+2. github-pengge/PyTorch-progressive_growing_of_gans (https://github.com/github-pengge/PyTorch-progressive_growing_of_gans)
+
 ## License
 
 Our code is under [MIT license](https://en.wikipedia.org/wiki/MIT_License). See [LICENSE](LICENSE)
