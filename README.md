@@ -58,6 +58,10 @@ speed_factor = 20
 
 "speed_factor" parameter will speed up the transition procedure of progressive growing of gans(switch resolution), at the price of reducing images' vividness, this parameter is aimed for speed up the validation progress in our development, however it is useful to see the progressive growing procedure more quickly, set it to "1" if you don't need it.
 
+
+
+**Now, if your settings have no problem, you should see running information like our [running_log_example](running_log_example.txt) **
+
 ### 4. Save and resume training weights
 
 Parameters in **train.py** will determine the frequency of saving the training result snapshot. And if you want to resume a previous result, just modify **train.py**:
