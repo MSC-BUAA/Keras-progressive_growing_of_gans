@@ -6,7 +6,9 @@ Keras implementation of Progressive Growing of GANs for Improved Quality, Stabil
 
 Developed by BUAA Microsoft Student Club.
 
-Developers: Kun Yan, Yihang Yin, Xutong Li
+Leader developers: Kun Yan, Yihang Yin, Xutong Li
+
+Developers: Jiaqi Wang, Junjie Wu
 
 
 ## Requirements
