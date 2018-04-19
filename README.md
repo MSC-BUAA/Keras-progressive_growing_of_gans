@@ -6,7 +6,7 @@ Keras implementation of Progressive Growing of GANs for Improved Quality, Stabil
 
 Developed by BUAA Microsoft Student Club.
 
-Leader developers: Kun Yan, Yihang Yin, Xutong Li
+Leader Developers: Kun Yan, Yihang Yin, Xutong Li
 
 Developers: Jiaqi Wang, Junjie Wu
 
@@ -77,13 +77,21 @@ resume_kimg             = <previous trained images in thousands>,
 
 ### 5. Using main.py (optional)
 
-We provide **main.py** for remote training for Visual Stdio or Visual Stdio Code users. So you can directely start the training process using command line, which will be convenient in remote job submission.
+We provide **main.py** for remote training for Visual Stdio or Visual Stdio Code users. So you can directely start the training process using command line or VS Debugger, which will be convenient in remote job submission.
 
 ```
 $ python3 main.py 	--data_dir = <dataset h5 file directory> 	\
 			--resume_dir = <weights snapshot directory> 	\
 			--resume_kimg = <previous trained images in thousands>
 ```
+
+## Results
+
+These two pictures are the training result we get so far, trained for 5 days on a NVIDIA GeForce 1080-ti GPU. You should be able to see the changes of resolution during the  progressively growing procedure of our model. Pretrained weight will be available later.
+
+![fakes003800](fakes003800.png)
+
+![fakes008080](fakes008080.png)
 
 ## Contact us
 
@@ -105,6 +113,6 @@ Yihang Yin (Somedaywilldo) : somedaywilldo@foxmail.com
 
 Our code is under [MIT license](https://en.wikipedia.org/wiki/MIT_License). See [LICENSE](LICENSE)
 
+## A Gift for Chinese Users
 
-
-
+We have translated the original paper to Chinese briefly, a markdown version is available now, hope this will benefits chinese users.
