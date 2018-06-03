@@ -67,6 +67,9 @@ def main():
     exit(0)
 
 def download():
+    if os.path.exists('./datasets/celeba_128x128.h5'):
+        print('Found Celeb-A.h5 - skip')
+        return
     download_celeb_a(config.data_dir)
     data_dir = 'celebA'
     create_celeba_channel_last('./datasets/celeba_128x128.h5', os.path.join(config.data_dir, data_dir), cx=89, cy=121)

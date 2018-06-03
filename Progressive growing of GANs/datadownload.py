@@ -72,8 +72,8 @@ def download_celeb_a(dirpath):
     if os.path.exists(save_path):
         print('[*] {} already exists'.format(save_path))
     else:
-        #download_file_from_google_drive(drive_id, save_path)
-        download_file_from_github(save_path)
+        download_file_from_google_drive(drive_id, save_path)
+        #download_file_from_github(save_path)
 
 
 
@@ -89,4 +89,4 @@ def prepare_data_dir(path):
         os.mkdir(path)
 
 if __name__ == '__main__':
-    download_celeb_a('./data')
+    download_celeb_a('./dataset')
