@@ -7,7 +7,6 @@ Keras implementation of Progressive Growing of GANs for Improved Quality, Stabil
 Developed by BUAA Microsoft Student Club.
 
 Leader Developers: Kun Yan, Yihang Yin, Xutong Li
-
 Developers: Jiaqi Wang, Junjie Wu
 
 
@@ -58,10 +57,6 @@ speed_factor = 20
 
 "speed_factor" parameter will speed up the transition procedure of progressive growing of gans(switch resolution), at the price of reducing images' vividness, this parameter is aimed for speed up the validation progress in our development, however it is useful to see the progressive growing procedure more quickly, set it to "1" if you don't need it.
 
-
-
-**So far, if your settings have no problem, you should see running information like our [running_log_example](running_log_example.txt)**
-
 ### 4. Save and resume training weights
 
 Parameters in **train.py** will determine the frequency of saving the training result snapshot. And if you want to resume a previous result, just modify **train.py**:
@@ -85,14 +80,6 @@ $ python3 main.py 	--data_dir = <dataset h5 file directory> 	\
 			--resume_kimg = <previous trained images in thousands>
 ```
 
-## Results
-
-These two pictures are the training result we get so far, trained for 5 days on a NVIDIA GeForce 1080-ti GPU. You should be able to see the changes of resolution during the  progressively growing procedure of our model. Pretrained weight will be available later.
-
-![fakes003800](fakes003800.png)
-
-![fakes008080](fakes008080.png)
-
 ## Contact us
 
 Any bug report or advice, please contact us:
@@ -101,18 +88,10 @@ Kun Yan (naykun) : yankun1138283845@foxmail.com
 
 Yihang Yin (Somedaywilldo) : somedaywilldo@foxmail.com
 
-## Reference
-
-1. *Progressive Growing of GANs for Improved Quality, Stability, and Variation*, **Tero Karras** (NVIDIA), **Timo Aila** (NVIDIA), **Samuli Laine** (NVIDIA), **Jaakko Lehtinen** (NVIDIA and Aalto University) [Paper (NVIDIA research)](http://research.nvidia.com/publication/2017-10_Progressive-Growing-of)
-
-2. tkarras/progressive_growing_of_gans (https://github.com/tkarras/progressive_growing_of_gans
-
-2. github-pengge/PyTorch-progressive_growing_of_gans (https://github.com/github-pengge/PyTorch-progressive_growing_of_gans)
-
 ## License
 
 Our code is under [MIT license](https://en.wikipedia.org/wiki/MIT_License). See [LICENSE](LICENSE)
 
-## A Gift for Chinese Users
 
-We have translated the original paper to Chinese briefly, a markdown version is available now, hope this will benefits chinese users.
+
+

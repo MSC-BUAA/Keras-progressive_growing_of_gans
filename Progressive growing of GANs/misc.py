@@ -1,9 +1,3 @@
-# Copyright (c) 2017, NVIDIA CORPORATION. All rights reserved.
-#
-# This work is licensed under the Creative Commons Attribution-NonCommercial
-# 4.0 International License. To view a copy of this license, visit
-# http://creativecommons.org/licenses/by-nc/4.0/ or send a letter to
-# Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 
 import os
 import sys
@@ -209,36 +203,6 @@ def create_result_subdir(result_dir, run_desc):
 
     return result_subdir
 
-#----------------------------------------------------------------------------
-# Network topology info.
-
-#def print_network_topology_info(layers):
-#    import lasagne
-
-#    print()
-#    print("%-16s%-28s%-10s%-20s%-20s%s" % ('LayerName', 'LayerType', 'Params', 'OutputShape', 'WeightShape', 'Activation'))
-#    print("%-16s%-28s%-10s%-20s%-20s%s" % (('---',) * 6))
-#    total_params = 0
-
-#    for l in lasagne.layers.get_all_layers(layers):
-#        type_str        = type(l).__name__
-#        nparams         = sum(np.prod(p.get_value().shape) for p in l.get_params(trainable=True))
-#        total_params    += nparams
-#        outshape        = lasagne.layers.get_output_shape(l)
-#        try:
-#            weights = l.W.get_value()
-#        except AttributeError:
-#            try:
-#                weights = l.W_param.get_value()
-#            except AttributeError:
-#                weights = np.zeros(())
-#        weight_str      = shape_to_str(weights.shape)
-#        act_str         = '' if not hasattr(l, 'nonlinearity') else l.nonlinearity.__name__ if isinstance(l.nonlinearity, types.FunctionType) else type(l.nonlinearity).__name__
-#        print("%-16s%-28s%-10d%-20s%-20s%s" % (l.name, type_str, nparams, shape_to_str(outshape), weight_str, act_str))
-
-#    print("%-16s%-28s%-10s%-20s%-20s%s" % (('---',) * 6))
-#    print("%-16s%-28s%-10d%-20s%-20s%s" % ('Total', '', total_params, '', '', ''))
-#    print()
 
 def shape_to_str(shape):
     str = ['%d' % v if v else '?' for v in shape]

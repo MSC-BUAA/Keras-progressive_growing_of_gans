@@ -105,6 +105,7 @@ def Generator(
     inputs = [Input(shape=[latent_size], name='Glatents')]
     net = inputs[-1]
 
+    #print("DEEEEEEEE")
 
     if normalize_latents:
         net = PixelNormLayer(name='Gnorm')(net)
@@ -293,7 +294,6 @@ def PG_GAN(G,D,latent_size,label_size,resolution,num_channels):
 
 
     #G_train = Model(inputs = inputs,outputs = [GAN_out],name = "PG_GAN")
-    
     G_train = Sequential([G, D])
     G_train.cur_lod = G.cur_lod
     
