@@ -18,11 +18,11 @@ Developers: Jiaqi Wang, Junjie Wu
 3. [CelebA Dataset](http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html)
 
 
-## How to run (For VStdio/VSCode Users)
+## How to run (For Visual Studio/ VSCode Users)
 
 ### 1. Clone the repository
 
-### 2. Open it as Visual Stdio solution
+### 2. Open it as Visual Studio solution
 
 #### To train
 
