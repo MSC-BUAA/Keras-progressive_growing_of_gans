@@ -39,6 +39,7 @@
     <Compile Include="misc.py" />
     <Compile Include="model.py" />
     <Compile Include="main.py" />
+    <Compile Include="predict.py" />
     <Compile Include="train.py" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
